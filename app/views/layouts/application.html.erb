@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SumoSuggest</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="menubar-hoverable header-fixed footer-fixed" ng-app="SumoSuggestApp" ng-controller="HomeController" >
+
+  <!-- BEGIN HEADER-->
+  <header id="header" >
+
+    <div class="headerbar">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="headerbar-left">
+        <ul class="header-nav header-nav-options">
+          <li class="header-nav-brand" >
+            <div class="brand-holder">
+              <a href="#">
+                <span class="text-xxl text-bold text-primary">SumoSuggest</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="headerbar-right">
+        <ul class="header-nav header-nav-options">
+        </ul><!--end .header-nav-options -->
+        <ul class="header-nav header-nav-profile">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+              <%= image_tag("avatar1.jpg@1422538623") %>
+              <span class="profile-info">
+                Nombre Usuario
+                <small>Administrator</small>
+              </span>
+            </a>
+            <ul class="dropdown-menu animation-dock">
+              <li class="dropdown-header">Config</li>
+              <li><a href="#">My profile</a></li>
+              <li><a href="#"><span class="badge style-danger pull-right">16</span>My blog</a></li>
+              <li><a href="#">My appointments</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
+              <li><a href="#"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+            </ul><!--end .dropdown-menu -->
+          </li><!--end .dropdown -->
+        </ul><!--end .header-nav-profile -->
+        <ul class="header-nav header-nav-toggle">
+        </ul><!--end .header-nav-toggle -->
+      </div><!--end #header-navbar-collapse -->
+    </div>
+  </header>
+  <!-- END HEADER-->
+
+  <!-- BEGIN BASE-->
+  <div id="base">
+    <!-- BEGIN OFFCANVAS LEFT -->
+    <div class="offcanvas">
+    </div><!--end .offcanvas-->
+    <!-- END OFFCANVAS LEFT -->
+
+
+
+    <!-- BEGIN CONTENT-->
+    <%= yield %>
+    <!-- END CONTENT -->
+    <!-- BEGIN OFFCANVAS RIGHT -->
+    <div class="offcanvas">
+
+
+    </div><!--end .offcanvas-->
+    <!-- END OFFCANVAS RIGHT -->
+
+  </div><!--end #base-->  
+  <!-- END BASE -->
+
+  <footer id="footer">
+
+    <div class="headerbar">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="headerbar-left">
+        <ul class="header-nav header-nav-options">
+          <li class="header-nav-brand">
+            <div class="brand-holder">
+              <span class="text-bold text-primary">Copyright© 2015 SumoSuggest all rights reserved</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="headerbar-right">
+        <ul class="header-nav header-nav-options">
+          <li>
+            <div class="" style="right">
+              <a href="#">
+                <i class="md md-lock-outline">Privacity Polity</i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="" style="right">
+              <a href="#">
+                <i class="md md-account-balance">Terms of Use</i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="" style="right">
+              <a href="#">
+                <i class="md md-flag">United States</i>
+              </a>
+            </div>          
+          </li>
+        </ul><!--end .header-nav-options -->
+        <ul class="header-nav header-nav-toggle">
+        </ul><!--end .header-nav-toggle -->
+      </div><!--end #header-navbar-collapse -->
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+      app.initialize();
+    </script>
+</body>
+</html>

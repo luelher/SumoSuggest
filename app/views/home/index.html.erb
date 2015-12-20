@@ -1,0 +1,273 @@
+<div id="content">
+
+  <section>
+    <div class="section-header">
+      <ol class="breadcrumb">
+        <li class="active">Keyworks Search</li>
+      </ol>
+    </div>
+    <div class="section-body contain-lg">
+      <div class="card tabs-left style-default-light">
+
+        <!-- BEGIN SEARCH BAR -->
+        <div class="card-body style-primary no-y-padding">
+          <form class="form form-inverse">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <div class="input-group-content">
+                  <input ng-model="search_text" type="text" class="form-control" id="searchInput" placeholder="Enter your search here">
+                  <div class="form-control-line"></div>
+                </div>
+                <div class="form input-group-content form-group floating-label">
+                  <select ng-model="country" id="select2" name="select2" class="form-control dirty">
+                    <option value="US">EEUU</option>
+                    <option value="UK">UK</option>
+                    <option value="JP">Japan</option>
+                    <option value="VE">Venezuela</option>
+                  </select>
+                  <label for="select2">Country</label>
+                </div>
+                <div class="input-group-btn">
+                  <button ng-click="searchBtn()" class="btn btn-floating-action btn-default-bright" type="button"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div><!--end .form-group -->
+          </form>
+        </div><!--end .card-body -->
+        <!-- END SEARCH BAR -->
+
+        <!-- BEGIN TAB RESULTS -->
+        <ul class="card-head nav nav-tabs tabs-accent" data-toggle="tabs">
+          <li ng-class="category=='search' ? 'active' : ''" ng-click="categoryBar('search')"><a  href="#">Search Engines</a></li>
+          <li ng-class="category=='video' ? 'active' : ''" ng-click="categoryBar('video')"><a href="#">Videos</a></li>
+          <li ng-class="category=='store' ? 'active' : ''" ng-click="categoryBar('store')"><a href="#">App Stores</a></li>
+          <li ng-class="category=='webshop' ? 'active' : ''" ng-click="categoryBar('webshop')"><a href="#">Webshop</a></li>
+          <li ng-class="category=='qa' ? 'active' : ''" ng-click="categoryBar('qa')"><a href="#">Q & A</a></li>
+          <li ng-class="category=='course' ? 'active' : ''" ng-click="categoryBar('course')"><a href="#">Courses</a></li>
+        </ul>
+        <!-- END TAB RESULTS -->
+
+        <!-- BEGIN TAB CONTENT -->
+        <div class="card-body tab-content style-default-bright">
+          <div class="tab-pane active" id="web1">
+            <div class="row">
+
+              <div ng-if="demo==false && loading==true" class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-8"></div>
+                  <div class="col-lg-4 col-sm-8"><%= image_tag("spinningwheel.gif") %></div>
+                  <div class="col-lg-4 col-sm-8"></div>
+                </div>
+              </div>              
+
+
+              <div ng-if="demo==true" class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-8">
+                    <div class="card">
+                      <div class="card-head card-head-xs style-primary">
+                        <header>Step One</header>
+                        <div class="tools">
+                          <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
+                        </div>
+                      </div><!--end .card-head -->
+                      <div class="card-body">
+                        Select Search Category at left bar
+                      </div><!--end .card-body -->
+                    </div><!--end .card -->
+                  </div>
+
+                  <div class="col-lg-4 col-sm-8">
+                    <div class="card">
+                      <div class="card-head card-head-xs style-primary">
+                        <header>Step Two</header>
+                        <div class="tools">
+                          <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
+                        </div>
+                      </div><!--end .card-head -->
+                      <div class="card-body">
+                        Select Country at right of top bar
+                      </div><!--end .card-body -->
+                    </div><!--end .card -->
+                  </div>
+
+                  <div class="col-lg-4 col-sm-8">
+                    <div class="card">
+                      <div class="card-head card-head-xs style-primary">
+                        <header>Step Tree</header>
+                        <div class="tools">
+                          <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
+                        </div>
+                      </div><!--end .card-head -->
+                      <div class="card-body">
+                        Enter your search criteria at left of top bar
+                      </div><!--end .card-body -->
+                    </div><!--end .card -->
+                  </div>
+                  
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+              </div>
+              <!-- END DEMO -->
+
+              <!-- BEGIN RESULT DIV -->
+              <div ng-if="demo==false && loading==false" class="col-lg-12">
+                <!-- BEGIN PAGE HEADER -->
+                <div class="margin-bottom-xxl">
+                  <span class="text-light text-lg">Search results <strong>34</strong></span>
+                  <div class="btn-group btn-group-sm pull-right">
+                    <div class="col-sm-16 pull-right">
+                      <button type="button" class="btn ink-reaction btn-raised btn-primary">
+                        <i class="md md-content-copy"></i> Copy Clipboard
+                      </button>                         
+                      <button type="button" class="btn ink-reaction btn-raised btn-primary">
+                        <i class="md md-file-download"></i> Download
+                      </button>
+                      <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown">
+                        <i class="md md-sort"></i> Sort
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right animation-dock" role="menu">
+                        <li class="active"><a href="#">Keywords asc</a></li>
+                        <li><a href="#">Keywords desc</a></li>
+                        <li><a href="#">Volumen asc</a></li>
+                        <li><a href="#">Volumen desc</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div><!--end .margin-bottom-xxl -->
+                <!-- END PAGE HEADER -->
+
+                <!-- BEGIN RESULT LIST -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Keywords</th>
+                      <th>Volumen</th>
+                      <th>CPC</th>
+                      <th>Competitions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox checkbox-inline checkbox-styled">
+                          <label>
+                            <input type="checkbox"><span></span>
+                          </label>
+                        </div>            
+                      </td>
+                      <td>Alvin</td>
+                      <td>120</td>
+                      <td>0.5 $</td>
+                      <td>20</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                <!-- END RESULTS LIST -->
+
+                <!-- BEGIN PAGING -->
+                <ul class="pagination">
+                  <li class="disabled"><a href="#">«</a></li>
+                  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">»</a></li>
+                </ul>
+                <!-- END PAGING -->
+
+              </div><!--end .col -->
+              <!-- END RESULT DIV -->
+
+            </div><!--end .row -->
+          </div><!--end .tab-pane -->
+        </div><!--end .card-body -->
+        <!-- END TAB CONTENT -->
+
+      </div><!--end .card -->
+
+
+    </div><!--end .section-body -->
+  </section>
+
+</div><!--end #content-->   
