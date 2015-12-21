@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" ng-controller="HomeController">
 
   <section>
     <div class="section-header">
@@ -121,7 +121,6 @@
               <div ng-if="demo==false && loading==false" class="col-lg-12">
                 <!-- BEGIN PAGE HEADER -->
                 <div class="margin-bottom-xxl">
-                  <span class="text-light text-lg">Search results <strong>34</strong></span>
                   <div class="btn-group btn-group-sm pull-right">
                     <div class="col-sm-16 pull-right">
                       <button type="button" class="btn ink-reaction btn-raised btn-primary">
@@ -130,131 +129,35 @@
                       <button type="button" class="btn ink-reaction btn-raised btn-primary">
                         <i class="md md-file-download"></i> Download
                       </button>
-                      <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown">
-                        <i class="md md-sort"></i> Sort
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-right animation-dock" role="menu">
-                        <li class="active"><a href="#">Keywords asc</a></li>
-                        <li><a href="#">Keywords desc</a></li>
-                        <li><a href="#">Volumen asc</a></li>
-                        <li><a href="#">Volumen desc</a></li>
-                      </ul>
                     </div>
                   </div>
                 </div><!--end .margin-bottom-xxl -->
                 <!-- END PAGE HEADER -->
 
-                <!-- BEGIN RESULT LIST -->
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Keywords</th>
-                      <th>Volumen</th>
-                      <th>CPC</th>
-                      <th>Competitions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="checkbox checkbox-inline checkbox-styled">
-                          <label>
-                            <input type="checkbox"><span></span>
-                          </label>
-                        </div>            
-                      </td>
-                      <td>Alvin</td>
-                      <td>120</td>
-                      <td>0.5 $</td>
-                      <td>20</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-                <!-- END RESULTS LIST -->
-
-                <!-- BEGIN PAGING -->
-                <ul class="pagination">
-                  <li class="disabled"><a href="#">«</a></li>
-                  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">»</a></li>
-                </ul>
-                <!-- END PAGING -->
+                <!-- BEGIN TABLE RESULT LIST -->
+                <div class="col-lg-12">
+                  <div class="table-responsive">
+                    <table id="resultTable" datatable="" class="table order-column hover dataTable no-footer" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtIntanceCallback">
+<!--                       <thead>
+                      <tr>
+                          <th>Keywords</th>
+                          <th>Volumen</th>
+                          <th>CPC</th>
+                          <th>Competitions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="result in dtModel.dtData">
+                          <td>{{ result.keywords }}</td>
+                          <td>{{ result.volumen }}</td>
+                          <td>{{ result.cpc }}</td>
+                          <td>{{ result.competitions }}</td>
+                      </tr>
+                      </tbody>    -->                   
+                    </table>
+                  </div><!--end .table-responsive -->
+                </div><!--end .col -->
+                <!-- END TABLE RESULTS LIST -->
 
               </div><!--end .col -->
               <!-- END RESULT DIV -->

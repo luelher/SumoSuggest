@@ -15,6 +15,7 @@
  *= require theme-default/font-awesome.min
  *= require theme-default/material-design-iconic-font.min
  *= require theme-default/libs/bootstrap-multiselect/bootstrap-multiselect
+ *= require theme-default/libs/DataTables/jquery.dataTables
  *= require home
  *= require_self
  */

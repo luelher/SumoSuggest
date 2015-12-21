@@ -5,7 +5,8 @@ class KeywordSearch
   API_VERSION = :v201509
   PAGE_SIZE = 40
 
-  def self.get_keyword_ideas(keyword_text)
+  def self.get_keyword_ideas(keyword_text, country, category)
+    
     config_filename = File.join(Rails.root, 'config', 'adwords_api.yml')
     adwords = AdwordsApi::Api.new(config_filename)
 
