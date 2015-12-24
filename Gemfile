@@ -51,3 +51,5 @@ gem 'google-adwords-api', '~> 0.18.0'
 # AngularJS
 gem 'angularjs-rails'
 
+gem "font-awesome-rails"
+
