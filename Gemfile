@@ -45,8 +45,16 @@ group :development do
   gem 'spring'
 end
 
+gem 'google-api-client'
+
 # AdWords API gem.
 gem 'google-adwords-api', '~> 0.18.0'
+
+# Gem for OAuth authorization.
+gem 'oauth2'
+
+# Bing Search API 2.0
+gem 'searchbing'
 
 # AngularJS
 gem 'angularjs-rails'

@@ -20,10 +20,10 @@
                 </div>
                 <div class="form input-group-content form-group floating-label">
                   <select ng-model="country" id="select2" name="select2" class="form-control dirty">
-                    <option value="US">EEUU</option>
-                    <option value="UK">UK</option>
-                    <option value="JP">Japan</option>
-                    <option value="VE">Venezuela</option>
+                    <option value="en-US">EEUU</option>
+                    <option value="fr-FR">Francia</option>
+                    <option value="ja-JP">Japan</option>
+                    <option value="es-AR">Argentina</option>
                   </select>
                   <label for="select2">Country</label>
                 </div>
@@ -41,7 +41,6 @@
           <li ng-class="category=='search' ? 'active' : ''" ng-click="categoryBar('search')"><a  href="#">Search Engines</a></li>
           <li ng-class="category=='video' ? 'active' : ''" ng-click="categoryBar('video')"><a href="#">Videos</a></li>
           <li ng-class="category=='store' ? 'active' : ''" ng-click="categoryBar('store')"><a href="#">App Stores</a></li>
-          <li ng-class="category=='webshop' ? 'active' : ''" ng-click="categoryBar('webshop')"><a href="#">Webshop</a></li>
           <li ng-class="category=='qa' ? 'active' : ''" ng-click="categoryBar('qa')"><a href="#">Q & A</a></li>
           <li ng-class="category=='course' ? 'active' : ''" ng-click="categoryBar('course')"><a href="#">Courses</a></li>
         </ul>

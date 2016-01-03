@@ -8,7 +8,7 @@ var app = {
 
     SumoSuggestApp.controller('HomeController', function($scope, $resource, DTOptionsBuilder, DTColumnDefBuilder, DTColumnBuilder){  
       $scope.category = "search";
-      $scope.country = "US";
+      $scope.country = "en-US";
       $scope.search_text = "";
       $scope.demo = true;
       $scope.loading = false;
@@ -34,7 +34,7 @@ var app = {
         if($scope.search_text!='' && $scope.country!='' && $scope.category!=''){
           
           if($scope.dtInstance==null){
-            $scope.dtOptions = DTOptionsBuilder.fromSource('/search').withOption('stateSave', true).withPaginationType('simple').withDisplayLength(10);
+            $scope.dtOptions = DTOptionsBuilder.fromSource('/search?keyword_text='+$scope.search_text+'&category='+$scope.category+'&country='+$scope.country).withOption('stateSave', true).withPaginationType('simple').withDisplayLength(10);
             $scope.dtColumns = [
               DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
                 .renderWith(function(data, type, full, meta) {
@@ -47,6 +47,7 @@ var app = {
               DTColumnBuilder.newColumn('competitions').withTitle("Competitions"),
             ];            
           }else{
+            $scope.dtOptions = DTOptionsBuilder.fromSource('/search?keyword_text='+$scope.search_text+'&category='+$scope.category+'&country='+$scope.country).withOption('stateSave', true).withPaginationType('simple').withDisplayLength(10);
             $scope.dtInstance.reloadData(function callback(json) {
               //console.log(json);
             }, false);

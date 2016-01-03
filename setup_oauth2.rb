@@ -44,6 +44,7 @@ def setup_oauth2()
         "OAuth2 credentials? (y/N): "
     response = gets.chomp
     if ('y'.casecmp(response) == 0) or ('yes'.casecmp(response) == 0)
+      puts token.to_s
       adwords.save_oauth2_token(token)
       puts 'OAuth2 token is now saved to ~/adwords_api.yml and will be ' +
           'automatically used by the library.'
