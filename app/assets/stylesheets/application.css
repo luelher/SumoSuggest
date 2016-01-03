@@ -12,8 +12,7 @@
  *
  *= require theme-default/bootstrap
  *= require theme-default/materialadmin
- *= require theme-default/font-awesome.min
- *= require theme-default/material-design-iconic-font.min
+ *= require font-awesome
  *= require theme-default/libs/bootstrap-multiselect/bootstrap-multiselect
  *= require theme-default/libs/DataTables/jquery.dataTables
  *= require home

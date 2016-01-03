@@ -59,3 +59,5 @@ gem 'searchbing'
 # AngularJS
 gem 'angularjs-rails'
 
+gem "font-awesome-rails"
+
