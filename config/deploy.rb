@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'SumoSuggest'
-set :repo_url, 'https://luelher:797965@bitbucket.org/sumosuggest/sumosuggest.git'
+set :repo_url, 'https://luelher@bitbucket.org/sumosuggest/sumosuggest.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -29,7 +29,7 @@ set :deploy_to, '/home/ec2-user/sumosuggest'
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
@@ -44,10 +44,10 @@ namespace :deploy do
       else
         puts "No existe archivo database.yml en #{shared_path}"
       end
-      if test("[ -f #{shared_path}/secret_token.rb ]")
-        execute :ln, '-s', "#{shared_path}/secret_token.rb", "#{release_path}/config/initializers/secret_token.rb"
+      if test("[ -f #{shared_path}/secrets.yml ]")
+        execute :ln, '-s', "#{shared_path}/secrets.yml", "#{release_path}/config/initializers/secrets.yml"
       else
-        puts "No existe archivo database.yml en #{shared_path}"
+        puts "No existe archivo secrets.yml en #{shared_path}"
       end
       # if test("[ -d #{shared_path}/assets ]")
       #   execute :ln, '-s', "#{shared_path}/assets", "#{release_path}/public/assets"
@@ -86,8 +86,9 @@ namespace :deploy do
   end
 
   after :deploy, :bundle_install
-  after :deploy, :link_config_files
   after :deploy, :compile_assets
+  after :deploy, :link_config_files
+  
 
 
 
