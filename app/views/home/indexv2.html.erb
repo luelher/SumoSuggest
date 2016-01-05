@@ -12,8 +12,8 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body ">
-              <form id="SearchForm" method="get" action="" class="form floating-label">
-              <div id="rootwizard" class="form-wizard form-wizard-horizontal">
+              <div id="rootwizard1" class="form-wizard form-wizard-horizontal">
+                <form class="form floating-label">
                   <div class="form-wizard-nav">
                     <div class="progress" style="width: 75%;"><div class="progress-bar progress-bar-primary" style="width: 0%;"></div></div>
                     <ul class="nav nav-justified nav-pills">
@@ -27,51 +27,40 @@
                     <div class="tab-pane active" id="tab1">
                       <br><br>
                       <div class="form-group">
-                          <div class="col-lg-3"></div>
-                          <div class="col-lg-6 form-group">
-                            <select ng-model="country" id="select2" name="select2" class="form-control dirty">
-                              <option value="en-US">EEUU</option>
-                              <option value="fr-FR">Francia</option>
-                              <option value="ja-JP">Japan</option>
-                              <option value="es-AR">Argentina</option>
-                            </select>
-                            <label for="select2">Country</label>
-                          </div>
-                          <div class="col-lg-3"></div>
+                          <select ng-model="country" id="select2" name="select2" class="form-control dirty">
+                            <option value="en-US">EEUU</option>
+                            <option value="fr-FR">Francia</option>
+                            <option value="ja-JP">Japan</option>
+                            <option value="es-AR">Argentina</option>
+                          </select>
+                          <label for="select2">Country</label>
                       </div>
                     </div><!--end #tab1 -->
                     <div class="tab-pane" id="tab2">
                       <br><br>
-                      <div class="col-lg-3"></div>
-                      <div class="col-lg-6 form-group">
-                        <div class="card-head">
-                          <ul class="card-head nav nav-tabs tabs-accent" data-toggle="tabs">
-                            <li ng-class="category=='search' ? 'active' : ''" ng-click="categoryBar('search')"><a  href="#">Search Engines</a></li>
-                            <li ng-class="category=='video' ? 'active' : ''" ng-click="categoryBar('video')"><a href="#">Videos</a></li>
-                            <li ng-class="category=='store' ? 'active' : ''" ng-click="categoryBar('store')"><a href="#">App Stores</a></li>
-                            <li ng-class="category=='qa' ? 'active' : ''" ng-click="categoryBar('qa')"><a href="#">Q & A</a></li>
-                            <li ng-class="category=='course' ? 'active' : ''" ng-click="categoryBar('course')"><a href="#">Courses</a></li>
-                          </ul>
-                        </div>
+                      <div class="card-head">
+                        <ul class="card-head nav nav-tabs tabs-accent" data-toggle="tabs">
+                          <li ng-class="category=='search' ? 'active' : ''" ng-click="categoryBar('search')"><a  href="#">Search Engines</a></li>
+                          <li ng-class="category=='video' ? 'active' : ''" ng-click="categoryBar('video')"><a href="#">Videos</a></li>
+                          <li ng-class="category=='store' ? 'active' : ''" ng-click="categoryBar('store')"><a href="#">App Stores</a></li>
+                          <li ng-class="category=='qa' ? 'active' : ''" ng-click="categoryBar('qa')"><a href="#">Q & A</a></li>
+                          <li ng-class="category=='course' ? 'active' : ''" ng-click="categoryBar('course')"><a href="#">Courses</a></li>
+                        </ul>
                       </div>
-                      <div class="col-lg-3"></div>
                     </div><!--end #tab2 -->
                     <div class="tab-pane" id="tab3">
                       <br><br>
-                      <div class="col-lg-3"></div>
-                      <div class="col-lg-6 form-group">
-                        <input type="text" name="thetext" id="thetext" class="form-control" ng-model="search_text">
-                        <label for="search_text" class="control-label">Keyword</label>
-                      </div>                      
-                      <div class="col-lg-3"></div>
+                      <div class="form-group">
+                        <input type="text" name="URL" id="URL" class="form-control">
+                        <label for="URL" class="control-label">Keyword</label>
+                      </div>
                     </div><!--end #tab3 -->
                     <div class="tab-pane" id="tab4">
                       <br><br>
                       
 
                   <div class="row">
-                  <div class="col-lg-1"></div>
-                  <div class="col-lg-10">
+                  <div class="col-lg-12">
 
                     <!-- BEGIN PAGE HEADER -->
                     <div class="margin-bottom-xxl">
@@ -79,7 +68,7 @@
                         <div class="col-sm-16 pull-right">
                           <button type="button" class="btn ink-reaction btn-raised btn-primary">
                             <i class="md md-content-copy"></i> Copy Clipboard
-                          </button>
+                          </button>                         
                           <button type="button" class="btn ink-reaction btn-raised btn-primary">
                             <i class="md md-file-download"></i> Download
                           </button>
@@ -89,13 +78,12 @@
                     <!-- END PAGE HEADER -->
 
                     <!-- BEGIN RESULT LIST -->
-                      <table id="resultTable" datatable="" class="table order-column hover dataTable no-footer" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtIntanceCallback" >
-                      </table>
+                    <table id="resultTable" datatable="" class="table order-column hover dataTable no-footer" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtIntanceCallback" dt-column-defs="dtColumnDefs">
+                    </table>
                     <!--end .table-responsive -->
 
                     <!-- END RESULTS LIST -->
                   </div><!--end .col -->
-                  <div class="col-lg-1"></div>
                 </div><!--end .row -->
 
 
@@ -103,11 +91,11 @@
                   </div><!--end .tab-content -->
                   <ul class="pager wizard">
                     <li class="previous first disabled"><a class="btn-raised" href="javascript:void(0);">First</a></li>
-                    <li class="next"><a ng-click="indexSearch &&  dtInstance.changeData('/search?keyword_text='+search_text+'&category='+category+'&country='+country)" class="btn-raised" href="javascript:void(0);" >Next</a></li>
+                    <li class="next"><a class="btn-raised" href="javascript:void(0);" >Next</a></li>
                     <!-- ng-click="searchBtn()"  -->
                   </ul>
+                </form>
               </div><!--end #rootwizard -->
-              </form>
             </div><!--end .card-body -->
           </div><!--end .card -->
         </div><!--end .col -->

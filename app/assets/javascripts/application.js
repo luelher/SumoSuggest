@@ -20,8 +20,11 @@
 //= require libs/bootstrap-multiselect/bootstrap-multiselect
 //= require libs/nanoscroller/jquery.nanoscroller.min
 //= require libs/microtemplating/microtemplating.min
-//= require libs/select2/select2.min.js
-//= require libs/datatables/datatables.js
+//= require libs/select2/select2.min
+//= require libs/wizard/jquery.bootstrap.wizard.min
+//= require libs/jquery-validation/dist/jquery.validate.min
+//= require libs/jquery-validation/dist/additional-methods.min
+//= require libs/datatables/datatables
 //= require angular
 //= require angular/angular-resource
 //= require angular-datatable/angular-datatables

@@ -14,7 +14,7 @@ class HomeController < ApplicationController
       # render json: data
       render json: KeywordSearch::get_keyword_ideas(params[:keyword_text], params[:country], params[:category])
     else
-      render status: :bad_request
+      render json: {}
     end
   end
 
