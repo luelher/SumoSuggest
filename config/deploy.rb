@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'SumoSuggest'
-set :repo_url, 'https://luelher@bitbucket.org/sumosuggest/sumosuggest.git'
+set :repo_url, 'https://bitbucket.org/sumosuggest/sumosuggest.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -34,6 +34,8 @@ set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :rails_env, 'production'
+
 namespace :deploy do
 
   desc "link config files"
@@ -57,39 +59,21 @@ namespace :deploy do
     end
   end
 
-  desc "compile assets"
-  task :compile_assets do
+  desc "do restart"
+  task :do_restart do
     on roles(:app) do
-      within release_path do
-        execute :rake, 'assets:precompile'
-      end
-    end
-  end
-
-  desc "bundle install"
-  task :bundle_install do
-    on roles(:app) do
-      within release_path do
-        execute 'bundle install'
-      end
-    end
-  end
-
-
-  after :restart, :clear_cache do
-    on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      run "mkdir -p #{release_path}/tmp" unless test("[ -d #{release_path}/tmp ]")
-      execute :touch, release_path.join('tmp/restart.txt')
-      execute "sudo service apache2 restart"
+      execute :mkdir, current_path.join('tmp') unless test("[ -d #{current_path}/tmp ]")
+      execute :touch, current_path.join('tmp/restart.txt')
+      execute 'sudo service httpd restart'
     end
   end
 
-  after :deploy, :bundle_install
-  after :deploy, :compile_assets
+  after :deploy, 'bundler:install'
   after :deploy, :link_config_files
-  
-
-
+  after :deploy, 'deploy:compile_assets'
+  after :deploy, :do_restart
 
 end
+
+
