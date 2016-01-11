@@ -18,14 +18,14 @@
   # Callback is set up by the application at runtime.
   :oauth2_callback: "http://grupoemporium.com/"
   :oauth2_token: 
-    :refresh_token: ""
-    :access_token: "ya29.XQJWuH9gljLl5dPWBFk7vcRoP_po4130-vTfFuVMUq6XKhE2oWwHNVeCENq9gD0Yxjkj"
+    # :refresh_token: ""
+    :access_token: "ya29.ZgJHQE6OiSXpLV_mIDnvQIAvz-2iidVSzviE4d5Or59TqjAgRE5knUBTutNftqKx06PBPA"
   #:oauth2_refresh_token: "1/dnvnwMiUgUt2Z8szeWkjEQ9RzDiP-W0rlhCIV3WhkXxIgOrJDtdun6zK6XiATCKT"
 
   # Other parameters.
   :developer_token: "vRY3gyXNWkxUYaZHQnQsgQ"
   # If you access only one account you can specify it here.
-  :client_customer_id: "676-937-4228"
+  :client_customer_id: "455-349-0136"
   #:user_agent: sumosuggest
 :service:
   # Only production environment is available now, see: http://goo.gl/Plu3o
