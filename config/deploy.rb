@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'SumoSuggest'
-set :repo_url, 'https://luelher:797965@bitbucket.org/sumosuggest/sumosuggest.git'
+set :repo_url, 'https://luelher@bitbucket.org/sumosuggest/sumosuggest.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
