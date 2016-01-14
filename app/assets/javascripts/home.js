@@ -1,11 +1,13 @@
+
 "use strict";
+
 var app = {
   // Application Constructor
   initialize: function() {
 
     var host_server_rest = 'http://sumosuggest.com';
 
-    var SumoSuggestApp = angular.module('SumoSuggestApp', ["datatables", 'datatables.select', "ngResource", "angular-clipboard", 'ngSanitize', 'ngCsv']);
+    var SumoSuggestApp = angular.module('SumoSuggestApp', ["datatables", "ngResource", "angular-clipboard", 'ngSanitize', 'ngCsv']);
 
     SumoSuggestApp.controller('HomeController', function($scope, $resource, DTOptionsBuilder, DTColumnDefBuilder, DTColumnBuilder, clipboard, $compile){  
       $scope.category = "search";
@@ -56,9 +58,9 @@ var app = {
 
       $scope.dtIntanceCallback = function (instance) {
         $scope.dtInstance = instance;
-        instance.DataTable.on('draw.dt', () => {
-            let elements = angular.element("#" + instance.id + " .ng-scope");
-            angular.forEach(elements, (element) => {
+        instance.DataTable.on('draw.dt', function() {
+            var elements = angular.element("#" + instance.id + " .ng-scope");
+            angular.forEach(elements, function(element) {
                 $compile(element)($scope)
             });
         });
@@ -68,11 +70,6 @@ var app = {
 
         if($scope.search_text!='' && $scope.country!='' && $scope.category!=''){
 
-          // $scope.dtInstance.changeData('/search?keyword_text='+$scope.search_text+'&category='+$scope.category+'&country='+$scope.country);
-
-          // $scope.dtInstance.reloadData(function callback(json) {
-          //   console.log(json);
-          // }, false);
         }else{
           alert('You must insert at less a search text');
         }
@@ -187,7 +184,3 @@ var app = {
       
   },
 };
-
-
-
-
