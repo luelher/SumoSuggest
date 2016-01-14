@@ -16,6 +16,7 @@
  *= require theme-default/libs/bootstrap-multiselect/bootstrap-multiselect
  *= require theme-default/libs/DataTables/jquery.dataTables
  *= require theme-default/libs/wizard/wizard.css
+ *= require theme-default/libs/toastr/toastr.css
  *= require home
  *= require_self
  */

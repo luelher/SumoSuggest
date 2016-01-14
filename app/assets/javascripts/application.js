@@ -25,8 +25,12 @@
 //= require libs/jquery-validation/dist/jquery.validate.min
 //= require libs/jquery-validation/dist/additional-methods.min
 //= require libs/datatables/datatables
+//= require libs/toastr/toastr
 //= require angular
 //= require angular/angular-resource
+//= require angular/angular-clipboard
+//= require angular/angular-sanitize.min
+//= require angular/ng-csv.min
 //= require angular-datatable/angular-datatables
 //= require angular-datatable/angular-datatables.directive
 //= require angular-datatable/angular-datatables.instances

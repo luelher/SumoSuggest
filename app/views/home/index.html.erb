@@ -77,10 +77,10 @@
                     <div class="margin-bottom-xxl">
                       <div class="btn-group btn-group-sm pull-right">
                         <div class="col-sm-16 pull-right">
-                          <button type="button" class="btn ink-reaction btn-raised btn-primary">
+                          <button ng-click="getClickBoard()" type="button" class="btn ink-reaction btn-raised btn-primary">
                             <i class="md md-content-copy"></i> Copy Clipboard
                           </button>
-                          <button type="button" class="btn ink-reaction btn-raised btn-primary">
+                          <button type="button" class="btn ink-reaction btn-raised btn-primary" field-separator=";" decimal-separator="." ng-csv="getCsv()" filename="keywords.csv">
                             <i class="md md-file-download"></i> Download
                           </button>
                         </div>
@@ -103,7 +103,7 @@
                   </div><!--end .tab-content -->
                   <ul class="pager wizard">
                     <li class="previous first disabled"><a class="btn-raised" href="javascript:void(0);">First</a></li>
-                    <li class="next"><a ng-click="indexSearch &&  dtInstance.changeData('/search?keyword_text='+search_text+'&category='+category+'&country='+country)" class="btn-raised" href="javascript:void(0);" >Next</a></li>
+                    <li class="next"><a ng-click="indexSearch && dtInstance.changeData('/search?keyword_text='+search_text+'&category='+category+'&country='+country)" class="btn-raised" href="javascript:void(0);" >Next</a></li>
                     <!-- ng-click="searchBtn()"  -->
                   </ul>
               </div><!--end #rootwizard -->

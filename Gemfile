@@ -64,3 +64,5 @@ gem 'angularjs-rails'
 
 gem "font-awesome-rails"
 
+gem 'yboss'
+

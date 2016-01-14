@@ -1,5 +1,6 @@
 require 'adwords_api'
 require File.join(Rails.root, 'lib/searchbing.rb')
+require File.join(Rails.root, 'lib/oauth_util.rb')
 
 class KeywordSearch
 
@@ -9,19 +10,28 @@ class KeywordSearch
   def self.get_keyword_ideas(keyword_text, country, category)
 
     result_bing = KeywordSearch.bing(keyword_text, country, category)
+    result_boss = KeywordSearch.boss(keyword_text, country, category)    
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
-    result_all = []
+
+    result_all = result_adwords
 
     if result_adwords.length > 0
-        result_all = result_adwords        
         result_bing.each do |bing|
             search_result = result_adwords.find { |h| h[:keywords] == bing[:keywords] }
             if search_result == nil
                 result_all << bing
             end
         end
+
+        result_boss.each do |boss|
+            search_result = result_adwords.find { |h| h[:keywords] == boss[:keywords] }
+            if search_result == nil
+                result_all << boss
+            end
+        end
+
     else
-        result_all = result_bing
+      result_all = result_bing + result_boss
     end
 
     return result_all
@@ -29,37 +39,59 @@ class KeywordSearch
 
   def self.bing(keyword_text, country, category)
     
+    result_all = []
+
     # Bing API
     config_bing = YAML::load_file(File.join(Rails.root, 'config', 'bing.yml'))
-    bing_obj = Bing.new(config_bing['config']['account'], PAGE_SIZE, 'RelatedSearch', country)
-    
-    result_all = []
-    result_a = []
-    result_b = []
-    case category
-      when 'search'
-        result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
-      when 'video'
-        result_a = bing_obj.search("YouTube #{keyword_text}").last[:RelatedSearch]
-      when 'course'
-        result_a = bing_obj.search("Udemy #{keyword_text}").last[:RelatedSearch]
-      when 'store'
-        result_a = bing_obj.search("Android #{keyword_text}").last[:RelatedSearch]
-        result_b = bing_obj.search("iOS #{keyword_text}").last[:RelatedSearch]
-      when 'qa'
-        result_a = bing_obj.search("Quora #{keyword_text}").last[:RelatedSearch]
-      else
-        result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
-    end
-    
-    result_a.each do |r|
-      result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => r[:ID]}
-    end
+    unless config_bing['config'].nil?
+        unless config_bing['config']['account'].nil?
 
-    result_b.each do |r|
-      result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => r[:ID]}
-    end
+            bing_obj = Bing.new(config_bing['config']['account'], PAGE_SIZE, 'RelatedSearch', country)
+            
+            result_a = []
+            result_b = []
+            case category
+              when 'search'
+                result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
+              when 'video'
+                result_a = bing_obj.search("YouTube #{keyword_text}").last[:RelatedSearch]
+                result_a.each do |r|
+                  r[:Title] = r[:Title].gsub("YouTube", "").strip
+                end
+              when 'course'
+                result_a = bing_obj.search("Udemy #{keyword_text}").last[:RelatedSearch]
+                result_a.each do |r|
+                  r[:Title] = r[:Title].gsub("Udemy", "").strip
+                end                
+              when 'store'
+                result_a = bing_obj.search("Android #{keyword_text}").last[:RelatedSearch]
+                result_a.each do |r|
+                  r[:Title] = r[:Title].gsub("Android", "").strip
+                end                
 
+                result_b = bing_obj.search("iOS #{keyword_text}").last[:RelatedSearch]
+                result_b.each do |r|
+                  r[:Title] = r[:Title].gsub("iOS", "").strip
+                end                
+              when 'qa'
+                result_a = bing_obj.search("Quora #{keyword_text}").last[:RelatedSearch]
+                result_a.each do |r|
+                  r[:Title] = r[:Title].gsub("Quora", "").strip
+                end                
+              else
+                result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
+            end
+            
+            result_a.each_with_index do |r, index|
+              result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+            end
+
+            result_b.each_with_index do |r, index|
+              result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+            end
+
+        end
+    end
     
     return result_all
 
@@ -183,12 +215,53 @@ class KeywordSearch
         competition = "%0.2f" % competition
       end
 
-      result_all << {:keywords => keyword, :volumen => volumen, :cpc => cpc, :competitions => competition, :id => index}
+      result_all << {:keywords => keyword, :volumen => volumen, :cpc => cpc, :competitions => competition, :id => index, :from => 'adwords'}
 
     end
     
     return result_all
 
+  end
+
+  def self.boss(keyword_text, country, category)
+
+    result_all = []
+
+    # Bing API
+    config_boss = YAML::load_file(File.join(Rails.root, 'config', 'boss.yml'))
+    unless config_boss['config'].nil?
+
+        unless config_boss['config']['key'].nil? or config_boss['config']['secret'].nil?
+
+
+            YBoss::Config.instance.oauth_key = config_boss['config']['key']
+            YBoss::Config.instance.oauth_secret = config_boss['config']['secret']
+
+            case category
+              when 'video'
+                sites_a = "youtube.com"
+              when 'course'
+                sites_a = "udemy.com"
+              when 'store'
+                sites_a = "play.google.com"
+                sites_b = "itunes.apple.com"
+              when 'qa'
+                sites_a = "quora.com"
+            end
+
+            begin
+              response = YBoss.related('q' => keyword_text, 'format' => 'json', 'market' => country.downcase, 'sites' => sites_a, 'start' => '0')
+
+              response.items.each_with_index do |value, index|
+                result_all << {:keywords => value.suggestion, :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+500, :from => 'boss'}
+                #index += 1
+              end
+            rescue YBoss::FetchError => e
+            end
+            return result_all
+
+        end
+    end
   end
 
 
