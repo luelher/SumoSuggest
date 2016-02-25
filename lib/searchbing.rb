@@ -62,7 +62,12 @@ class Bing
 			http.request(req)
 		}
 
-		body = JSON.parse(res.body, :symbolize_names => true)
-		result_set = body[:d][:results]
+		begin
+			body = JSON.parse(res.body, :symbolize_names => true)
+			result_set = body[:d][:results]		
+		rescue
+			result_set = {}
+		end
+
 	end	
 end

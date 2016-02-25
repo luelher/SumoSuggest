@@ -66,3 +66,6 @@ gem "font-awesome-rails"
 
 gem 'yboss'
 
+gem 'geocoder'
+
+gem 'countries', :require => 'countries/global'

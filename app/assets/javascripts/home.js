@@ -9,9 +9,9 @@ var app = {
 
     var SumoSuggestApp = angular.module('SumoSuggestApp', ["datatables", "ngResource", "angular-clipboard", 'ngSanitize', 'ngCsv']);
 
-    SumoSuggestApp.controller('HomeController', function($scope, $resource, DTOptionsBuilder, DTColumnDefBuilder, DTColumnBuilder, clipboard, $compile){  
+    SumoSuggestApp.controller('HomeController', function($scope, $resource, $http, DTOptionsBuilder, DTColumnDefBuilder, DTColumnBuilder, clipboard, $compile){  
       $scope.category = "search";
-      $scope.country = "en-US";
+      $scope.country = "US";
       $scope.search_text = "";
       $scope.demo = true;
       $scope.loading = false;
@@ -175,7 +175,15 @@ var app = {
         return d;
       };
 
+      $scope.GetCountry = function () {
+        $http.get('http://ipinfo.io/json').success(function(data) {
+           $scope.country = data.country;
+        });
+      }
+
+
       $scope.initSlider();
+      $scope.GetCountry();
 
     });
 

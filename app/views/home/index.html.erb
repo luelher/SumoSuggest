@@ -30,10 +30,7 @@
                           <div class="col-lg-3"></div>
                           <div class="col-lg-6 form-group">
                             <select ng-model="country" id="select2" name="select2" class="form-control dirty">
-                              <option value="en-US">EEUU</option>
-                              <option value="fr-FR">Francia</option>
-                              <option value="ja-JP">Japan</option>
-                              <option value="es-AR">Argentina</option>
+                              <%= options_for_select(COUNTRIES.collect {|k,v| [ v[1], k ] } ) %>
                             </select>
                             <label for="select2">Country</label>
                           </div>

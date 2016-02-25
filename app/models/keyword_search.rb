@@ -48,46 +48,68 @@ class KeywordSearch
 
             bing_obj = Bing.new(config_bing['config']['account'], PAGE_SIZE, 'RelatedSearch', country)
             
-            result_a = []
-            result_b = []
-            case category
-              when 'search'
-                result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
-              when 'video'
-                result_a = bing_obj.search("YouTube #{keyword_text}").last[:RelatedSearch]
-                result_a.each do |r|
-                  r[:Title] = r[:Title].gsub("YouTube", "").strip
-                end
-              when 'course'
-                result_a = bing_obj.search("Udemy #{keyword_text}").last[:RelatedSearch]
-                result_a.each do |r|
-                  r[:Title] = r[:Title].gsub("Udemy", "").strip
-                end                
-              when 'store'
-                result_a = bing_obj.search("Android #{keyword_text}").last[:RelatedSearch]
-                result_a.each do |r|
-                  r[:Title] = r[:Title].gsub("Android", "").strip
-                end                
+            if true
 
-                result_b = bing_obj.search("iOS #{keyword_text}").last[:RelatedSearch]
-                result_b.each do |r|
-                  r[:Title] = r[:Title].gsub("iOS", "").strip
-                end                
-              when 'qa'
-                result_a = bing_obj.search("Quora #{keyword_text}").last[:RelatedSearch]
-                result_a.each do |r|
-                  r[:Title] = r[:Title].gsub("Quora", "").strip
-                end                
-              else
-                result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
-            end
-            
-            result_a.each_with_index do |r, index|
-              result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
-            end
+              result_a = []
+              result_b = []
+              case category
+                when 'search'
+                  bing_result = bing_obj.search(keyword_text)
+                  if bing_result.length > 0
+                    result_a = bing_result.last[:RelatedSearch]
+                  end
+                when 'video'
+                  bing_result = bing_obj.search("YouTube #{keyword_text}")
+                  if bing_result.length > 0
+                    result_a = bing_result.last[:RelatedSearch]
+                    result_a.each do |r|
+                      r[:Title] = r[:Title].gsub("YouTube", "").strip
+                    end
+                  end
+                when 'course'
+                  bing_result = bing_obj.search("Udemy #{keyword_text}")
+                  if bing_result.length > 0
+                    result_a = bing_result.last[:RelatedSearch]
+                    result_a.each do |r|
+                      r[:Title] = r[:Title].gsub("Udemy", "").strip
+                    end
+                  end
+                when 'store'
+                  bing_result = bing_obj.search("Android #{keyword_text}")
+                  if bing_result.length > 0
+                    result_a = bing_result.last[:RelatedSearch]
+                    result_a.each do |r|
+                      r[:Title] = r[:Title].gsub("Android", "").strip
+                    end
+                  end
 
-            result_b.each_with_index do |r, index|
-              result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+                  bing_result = bing_obj.search("iOS #{keyword_text}")
+                  if bing_result.length > 0
+                    result_b = bing_result.last[:RelatedSearch]
+                    result_b.each do |r|
+                      r[:Title] = r[:Title].gsub("iOS", "").strip
+                    end
+                  end
+                when 'qa'
+                  bing_result = bing_obj.search("Quora #{keyword_text}")
+                  if bing_result.length > 0
+                    result_a = bing_result.last[:RelatedSearch]
+                    result_a.each do |r|
+                      r[:Title] = r[:Title].gsub("Quora", "").strip
+                    end
+                  end
+                else
+                  result_a = bing_obj.search(keyword_text).last[:RelatedSearch]
+              end
+              
+              result_a.each_with_index do |r, index|
+                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+              end
+
+              result_b.each_with_index do |r, index|
+                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+              end
+
             end
 
         end
