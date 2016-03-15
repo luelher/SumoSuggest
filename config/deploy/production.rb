@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{ec2-user@52.34.145.125}
-role :web, %w{ec2-user@52.34.145.125}
-role :db,  %w{ec2-user@52.34.145.125}
+role :app, %w{sumosuggest@164.132.198.51}
+role :web, %w{sumosuggest@164.132.198.51}
+role :db,  %w{sumosuggest@164.132.198.51}
 
 
 # Extended Server Syntax
@@ -25,9 +25,9 @@ role :db,  %w{ec2-user@52.34.145.125}
 #
 # Global options
 # --------------
-set :ssh_options, {
-  keys: %w(/home/luelher/Dropbox/keys/sumosuggest.pem)
-}
+# set :ssh_options, {
+#   keys: %w(/home/luelher/Dropbox/keys/sumosuggest.pem)
+# }
 #
 # And/or per server (overrides global)
 # ------------------------------------
