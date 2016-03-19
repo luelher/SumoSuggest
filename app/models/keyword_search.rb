@@ -13,19 +13,19 @@ class KeywordSearch
     result_bing_a = KeywordSearch.bing(keyword_text+" a", country, category)
     result_bing_b = KeywordSearch.bing(keyword_text+" b", country, category)
 
-    result_bing = result_bing_a + result_bing_b
+    result_bing += result_bing_a + result_bing_b
 
     result_boss = KeywordSearch.boss(keyword_text, country, category)    
     result_boss_a = KeywordSearch.boss(keyword_text+" a", country, category)    
     result_boss_b = KeywordSearch.boss(keyword_text+" b", country, category)  
 
-    result_boss = result_boss_a + result_boss_b
+    result_boss += result_boss_a + result_boss_b
     
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
     result_adwords_a = KeywordSearch.adwords(keyword_text+" a", country, category)
     result_adwords_b = KeywordSearch.adwords(keyword_text+" b", country, category)
 
-    result_adwords = result_adwords_a + result_adwords_b
+    result_adwords += result_adwords_a + result_adwords_b
 
     result_all = result_adwords
 
