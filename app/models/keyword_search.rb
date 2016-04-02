@@ -27,28 +27,10 @@ class KeywordSearch
 
     result_adwords += result_adwords_a + result_adwords_b
 
-    result_all = result_adwords
+    result_all = result_adwords + result_bing + result_boss
 
-    if result_adwords.length > 0
-        result_bing.each do |bing|
-            search_result = result_adwords.find { |h| h[:keywords] == bing[:keywords] }
-            if search_result == nil
-                result_all << bing
-            end
-        end
-
-        result_boss.each do |boss|
-            search_result = result_adwords.find { |h| h[:keywords] == boss[:keywords] }
-            if search_result == nil
-                result_all << boss
-            end
-        end
-
-    else
-      result_all = result_bing + result_boss
-    end
-
-    return result_all
+    return sort_results(clean_results(result_all))
+    #return result_all
   end
 
   def self.bing(keyword_text, country, category)
@@ -117,11 +99,11 @@ class KeywordSearch
               end
               
               result_a.each_with_index do |r, index|
-                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing', :criteria => keyword_text}
               end
 
               result_b.each_with_index do |r, index|
-                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing'}
+                result_all << {:keywords => r[:Title], :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+100, :from => 'bing', :criteria => keyword_text}
               end
 
             end
@@ -136,6 +118,7 @@ class KeywordSearch
 
   def self.adwords(keyword_text, country, category)
 
+    backup_keyword_text = keyword_text
     config_filename = File.join(Rails.root, 'config', 'adwords_api.yml')
     adwords = AdwordsApi::Api.new(config_filename)
 
@@ -254,7 +237,7 @@ class KeywordSearch
         competition = "%0.2f" % competition
       end
 
-      result_all << {:keywords => keyword, :volumen => volumen, :cpc => cpc, :competitions => competition, :id => index, :from => 'adwords'}
+      result_all << {:keywords => keyword, :volumen => volumen, :cpc => cpc, :competitions => competition, :id => index, :from => 'adwords', :criteria => backup_keyword_text}
 
     end
     
@@ -292,7 +275,7 @@ class KeywordSearch
               response = YBoss.related('q' => keyword_text, 'format' => 'json', 'market' => country.downcase, 'sites' => sites_a, 'start' => '0')
 
               response.items.each_with_index do |value, index|
-                result_all << {:keywords => value.suggestion, :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+500, :from => 'boss'}
+                result_all << {:keywords => value.suggestion, :volumen => 0, :cpc => "0.0", :competitions => 0, :id => index+500, :from => 'boss', :criteria => keyword_text}
                 #index += 1
               end
             rescue YBoss::FetchError => e
@@ -303,5 +286,23 @@ class KeywordSearch
     end
   end
 
+
+  def self.clean_results(results)
+
+    cleans = []
+
+    results.each do |r|
+        search_result = cleans.select { |h| h[:keywords] == r[:keywords] }.count
+        if search_result == 0
+            cleans << r
+        end
+    end
+
+    return cleans
+  end
+
+  def self.sort_results(results)
+    return results.sort_by { |hsh| hsh[:criteria] }
+  end
 
 end

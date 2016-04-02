@@ -35,6 +35,7 @@ var app = {
             return '<div class="checkbox checkbox-inline checkbox-styled ng-scope"><label><input type="checkbox" ng-model="selected[' + data.id + ']" ng-click="toggleOne(selected)"><span></span></label></div>';
           }),
         DTColumnBuilder.newColumn('keywords').withTitle("Keywords"),
+        DTColumnBuilder.newColumn('criteria').withTitle("Criteria"),
         DTColumnBuilder.newColumn('volumen').withTitle("Volumen"),
         DTColumnBuilder.newColumn('cpc').withTitle("CPC"),
         DTColumnBuilder.newColumn('competitions').withTitle("Competitions"),
