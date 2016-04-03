@@ -12,25 +12,30 @@ class KeywordSearch
     result_bing = KeywordSearch.bing(keyword_text, country, category)
     result_bing_a = KeywordSearch.bing(keyword_text+" a", country, category)
     result_bing_b = KeywordSearch.bing(keyword_text+" b", country, category)
+    result_bing_c = KeywordSearch.bing(keyword_text+" c", country, category)
+    result_bing_d = KeywordSearch.bing(keyword_text+" d", country, category)
 
-    result_bing += result_bing_a + result_bing_b
+    result_bing += result_bing_a + result_bing_b + result_bing_c + result_bing_d
 
     result_boss = KeywordSearch.boss(keyword_text, country, category)    
     result_boss_a = KeywordSearch.boss(keyword_text+" a", country, category)    
     result_boss_b = KeywordSearch.boss(keyword_text+" b", country, category)  
+    result_boss_c = KeywordSearch.boss(keyword_text+" c", country, category)  
+    result_boss_d = KeywordSearch.boss(keyword_text+" d", country, category)  
 
-    result_boss += result_boss_a + result_boss_b
+    result_boss += result_boss_a + result_boss_b + result_boss_c + result_boss_d
     
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
     result_adwords_a = KeywordSearch.adwords(keyword_text+" a", country, category)
     result_adwords_b = KeywordSearch.adwords(keyword_text+" b", country, category)
+    result_adwords_c = KeywordSearch.adwords(keyword_text+" c", country, category)
+    result_adwords_d = KeywordSearch.adwords(keyword_text+" d", country, category)
 
-    result_adwords += result_adwords_a + result_adwords_b
+    result_adwords += result_adwords_a + result_adwords_b + result_adwords_c + result_adwords_d
 
     result_all = result_adwords + result_bing + result_boss
 
     return sort_results(clean_results(result_all))
-    #return result_all
   end
 
   def self.bing(keyword_text, country, category)
