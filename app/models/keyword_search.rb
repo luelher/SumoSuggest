@@ -7,31 +7,24 @@ class KeywordSearch
   API_VERSION = :v201509
   PAGE_SIZE = 20
 
+  ADITIONAL_CRITERIAS = ["a", "b", "c", "d", "aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd"]
+
   def self.get_keyword_ideas(keyword_text, country, category)
 
     result_bing = KeywordSearch.bing(keyword_text, country, category)
-    result_bing_a = KeywordSearch.bing(keyword_text+" a", country, category)
-    result_bing_b = KeywordSearch.bing(keyword_text+" b", country, category)
-    result_bing_c = KeywordSearch.bing(keyword_text+" c", country, category)
-    result_bing_d = KeywordSearch.bing(keyword_text+" d", country, category)
-
-    result_bing += result_bing_a + result_bing_b + result_bing_c + result_bing_d
+    ADITIONAL_CRITERIAS.each do |criteria|
+      result_bing += KeywordSearch.bing(keyword_text+" #{criteria}", country, category)
+    end
 
     result_boss = KeywordSearch.boss(keyword_text, country, category)    
-    result_boss_a = KeywordSearch.boss(keyword_text+" a", country, category)    
-    result_boss_b = KeywordSearch.boss(keyword_text+" b", country, category)  
-    result_boss_c = KeywordSearch.boss(keyword_text+" c", country, category)  
-    result_boss_d = KeywordSearch.boss(keyword_text+" d", country, category)  
+    ADITIONAL_CRITERIAS.each do |criteria|
+      result_boss += KeywordSearch.boss(keyword_text+" #{criteria}", country, category)    
+    end
 
-    result_boss += result_boss_a + result_boss_b + result_boss_c + result_boss_d
-    
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
-    result_adwords_a = KeywordSearch.adwords(keyword_text+" a", country, category)
-    result_adwords_b = KeywordSearch.adwords(keyword_text+" b", country, category)
-    result_adwords_c = KeywordSearch.adwords(keyword_text+" c", country, category)
-    result_adwords_d = KeywordSearch.adwords(keyword_text+" d", country, category)
-
-    result_adwords += result_adwords_a + result_adwords_b + result_adwords_c + result_adwords_d
+    ADITIONAL_CRITERIAS.each do |criteria|
+      result_adwords += KeywordSearch.adwords(keyword_text+" #{criteria}", country, category)
+    end
 
     result_all = result_adwords + result_bing + result_boss
 
