@@ -7,22 +7,22 @@ class KeywordSearch
   API_VERSION = :v201509
   PAGE_SIZE = 20
 
-  ADITIONAL_CRITERIAS = ["a", "b", "c", "d", "aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd"]
+  ADDITIONAL_CRITERIAS = ["a", "b", "c", "d", "aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd"]
 
   def self.get_keyword_ideas(keyword_text, country, category)
 
     result_bing = KeywordSearch.bing(keyword_text, country, category)
-    ADITIONAL_CRITERIAS.each do |criteria|
+    ADDITIONAL_CRITERIAS.each do |criteria|
       result_bing += KeywordSearch.bing(keyword_text+" #{criteria}", country, category)
     end
 
     result_boss = KeywordSearch.boss(keyword_text, country, category)    
-    ADITIONAL_CRITERIAS.each do |criteria|
+    ADDITIONAL_CRITERIAS.each do |criteria|
       result_boss += KeywordSearch.boss(keyword_text+" #{criteria}", country, category)    
     end
 
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
-    ADITIONAL_CRITERIAS.each do |criteria|
+    ADDITIONAL_CRITERIAS.each do |criteria|
       result_adwords += KeywordSearch.adwords(keyword_text+" #{criteria}", country, category)
     end
 
