@@ -17,6 +17,7 @@
 //= require libs/jquery-validation/dist/jquery.validate.min
 //= require libs/datatables/datatables
 //= require libs/toastr/toastr.min
+//= require libs/loaders/loaders.css.js
 //= require angular
 //= require angular/angular-resource.min
 //= require angular/angular-clipboard

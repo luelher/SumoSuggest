@@ -13,6 +13,7 @@ var app = {
       $scope.category = "search";
       $scope.country = "US";
       $scope.search_text = "";
+      $scope.pages = {0:0};
       $scope.demo = true;
       $scope.loading = false;
       $scope.dtInstance = null;
@@ -23,8 +24,34 @@ var app = {
 
       var titleHtml = '<div class="checkbox checkbox-inline checkbox-styled ng-scope"><label><input type="checkbox" ng-model="selectAll" ng-click="toggleAll(selectAll, selected)"><span></span></label></div>';
 
-      $scope.dtOptions = DTOptionsBuilder.fromSource('/search?keyword_text='+$scope.search_text+'&category='+$scope.category+'&country='+$scope.country)
+      $scope.callback_reload = function (data) {
+        console.log("callback_reload");
+        var start = parseInt(data.start);
+        if($scope.pages[start + 10] == undefined && data.data.length > 0){
+          $scope.pages[start + 10] = data.next_letter
+        }
+        return data.data;
+      };
+
+      $scope.dtOptions = DTOptionsBuilder.newOptions()     // .fromSource('/search?keyword_text='+$scope.search_text+'&category='+$scope.category+'&country='+$scope.country)
+          .withOption('ajax', {
+            // Either you specify the AjaxDataProp here
+            // dataSrc: 'data',
+            url: '/search',
+            type: 'GET',
+            data: function( d ) {
+              d.keyword_text=$scope.search_text;
+              d.category=$scope.category;
+              d.country=$scope.country;
+              d.pages=$scope.pages;
+            },
+            dataSrc: $scope.callback_reload
+          })
+          .withDataProp('data')
+          .withOption('processing', true)
+          .withOption('serverSide', true)
           .withOption('stateSave', true)
+          .withOption('bInfo', false)
           .withPaginationType('simple')
           .withDisplayLength(10);
 
@@ -112,7 +139,6 @@ var app = {
 
       };
 
-
       function handleTabShow(tab, navigation, index, wizard){
 
         if(index==2) $scope.indexSearch = true;
@@ -179,6 +205,8 @@ var app = {
       $scope.GetCountry = function () {
         $http.get('http://ipinfo.io/json').success(function(data) {
            $scope.country = data.country;
+           $("#resultTable_processing").html('<div class="loader-inner ball-spin-fade-loader"></div>');
+           $('.loader-inner').loaders();             
         });
       }
 
@@ -190,6 +218,13 @@ var app = {
 
   },
   onLoad: function() {
-      
+
   },
 };
+
+
+$(document).on("page:load", function() {
+  
+}); 
+
+
