@@ -13,7 +13,7 @@ class KeywordSearch
 
     result_all = []
     count = 0
-    while result_all.size < result_count || count == 10 do
+    while result_all.size < result_count || count == 10 || from_index < KeywordSearch::ADDITIONAL_CRITERIAS.size do
       from_letter = KeywordSearch::ADDITIONAL_CRITERIAS[from_index]
       result_all = KeywordSearch.get_keywords_by_criteria((keyword_text+" #{from_letter}").strip, country, category, result_all)  
       from_index+=1
