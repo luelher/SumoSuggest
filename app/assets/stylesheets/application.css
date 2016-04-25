@@ -17,6 +17,7 @@
  *= require theme-default/libs/DataTables/jquery.dataTables
  *= require theme-default/libs/wizard/wizard.css
  *= require theme-default/libs/toastr/toastr.css
+ *= require theme-default/loaders.min
  *= require home
  *= require_self
  */

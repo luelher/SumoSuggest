@@ -100,7 +100,7 @@
                   </div><!--end .tab-content -->
                   <ul class="pager wizard">
                     <li class="previous first disabled"><a class="btn-raised" href="javascript:void(0);">First</a></li>
-                    <li class="next"><a ng-click="indexSearch && dtInstance.changeData('/search?keyword_text='+search_text+'&category='+category+'&country='+country)" class="btn-raised" href="javascript:void(0);" >Next</a></li>
+                    <li class="next"><a ng-click="indexSearch && dtInstance.reloadData(callback_reload)" class="btn-raised" href="javascript:void(0);" >Next</a></li>
                     <!-- ng-click="searchBtn()"  -->
                   </ul>
               </div><!--end #rootwizard -->

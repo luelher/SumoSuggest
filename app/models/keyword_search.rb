@@ -7,28 +7,33 @@ class KeywordSearch
   API_VERSION = :v201509
   PAGE_SIZE = 20
 
-  ADDITIONAL_CRITERIAS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  ADDITIONAL_CRITERIAS = ["", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-  def self.get_keyword_ideas(keyword_text, country, category)
+  def self.get_keyword_ideas(keyword_text, country, category, from_index, result_count)
+
+    result_all = []
+    count = 0
+    while (result_all.size < result_count || count == 10) && from_index < ADDITIONAL_CRITERIAS.size do
+      from_letter = KeywordSearch::ADDITIONAL_CRITERIAS[from_index]
+      result_all = KeywordSearch.get_keywords_by_criteria((keyword_text+" #{from_letter}").strip, country, category, result_all)  
+      from_index+=1
+      count+=1
+    end
+
+    return sort_results(result_all), from_index
+  end
+
+  def self.get_keywords_by_criteria(keyword_text, country, category, another_results)
 
     result_bing = KeywordSearch.bing(keyword_text, country, category)
-    ADDITIONAL_CRITERIAS.each do |criteria|
-      result_bing += KeywordSearch.bing(keyword_text+" #{criteria}", country, category)
-    end
 
     result_boss = KeywordSearch.boss(keyword_text, country, category)    
-    ADDITIONAL_CRITERIAS.each do |criteria|
-      result_boss += KeywordSearch.boss(keyword_text+" #{criteria}", country, category)    
-    end
 
     result_adwords = KeywordSearch.adwords(keyword_text, country, category)
-    ADDITIONAL_CRITERIAS.each do |criteria|
-      result_adwords += KeywordSearch.adwords(keyword_text+" #{criteria}", country, category)
-    end
 
-    result_all = result_adwords + result_bing + result_boss
+    result_all = result_adwords + result_bing + result_boss + another_results
 
-    return sort_results(clean_results(result_all))
+    return clean_results(result_all)
   end
 
   def self.bing(keyword_text, country, category)
