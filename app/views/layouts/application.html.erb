@@ -18,7 +18,7 @@
         <ul class="header-nav header-nav-options">
           <li class="header-nav-brand" >
             <div class="brand-holder">
-              <a href="#">
+              <a href="<%= url_for('/') %>">
                 <span class="text-xxl text-bold text-primary">SumoSuggest</span>
               </a>
             </div>
@@ -41,11 +41,11 @@
           </li>
  -->
           <li class="hidden-xs">
-            <a href="#">
+<!--             <a href="#">
               <i class="fa fa-question-circle"></i>
               Get Help
             </a>
-          </li>
+ -->          </li>
         </ul><!--end .header-nav-profile -->
         <ul class="header-nav header-nav-toggle">
         </ul><!--end .header-nav-toggle -->
@@ -84,7 +84,7 @@
         <ul class="header-nav header-nav-options">
           <li class="header-nav-brand">
             <div class="brand-holder">
-              <span class="text-bold text-primary">Copyright© 2015 SumoSuggest all rights reserved</span>
+              <span class="text-bold text-primary">Copyright© 2016 SumoSuggest - all rights reserved</span>
             </div>
           </li>
         </ul>
@@ -95,23 +95,21 @@
         <ul class="header-nav header-nav-options">
           <li>
             <div class="" style="right">
-              <a href="#">
+              <a href="<%= url_for("privacity") %>">
                 <i class="md md-lock-outline">Privacity Polity</i>
               </a>
             </div>
           </li>
           <li>
             <div class="" style="right">
-              <a href="#">
+              <a href="<%= url_for("terms") %>">
                 <i class="md md-account-balance">Terms of Use</i>
               </a>
             </div>
           </li>
           <li>
             <div class="" style="right">
-              <a href="#">
-                <i class="md md-flag">United States</i>
-              </a>
+              <i class="md md-flag">United States</i>
             </div>          
           </li>
         </ul><!--end .header-nav-options -->

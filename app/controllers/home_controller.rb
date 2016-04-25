@@ -5,6 +5,12 @@ class HomeController < ApplicationController
     
   end
 
+  def privacity
+  end
+
+  def terms
+  end
+
   def search
     if params[:keyword_text].to_s!='' && params[:country].to_s!='' && params[:category]!=''
 
