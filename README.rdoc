@@ -1,28 +1,25 @@
-== README
+== SUMOSUGGEST
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Keywords Sugestion App
 
-Things you may want to cover:
+This app work with Google Adwords API, Bing API and Boss API (I think last one it is deprecated)
 
-* Ruby version
+Backend was developed in Ruby+Rails+PostgreSQL.
 
-* System dependencies
+Frontend was developed in HTML+CSS+AngularJS
 
-* Configuration
+== Instalation
 
-* Database creation
+* Instaling RVM
+* git clone
+* rvm install 2.1.0
+* gem install bundle
+* bundle install
+* Config config/database.yml with config/database.yml.example
+* Config config/boss.yml, config/bing.yml and config/adwords_api.yml api keys
+* rake db:migrate
+* rails server
+* View the app in http://localhost:3000
 
-* Database initialization
+Enjoy!!
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
