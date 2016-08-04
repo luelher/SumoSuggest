@@ -2,7 +2,7 @@
 
 Keywords Sugestion App
 
-This app work with Google Adwords API, Bing API and Boss API (I think last one it is deprecated)
+This app work with Google Adwords API, Bing API and Boss API (I think last one is deprecated)
 
 Backend was developed in Ruby+Rails+PostgreSQL.
 
